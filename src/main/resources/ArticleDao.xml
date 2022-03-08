@@ -20,12 +20,30 @@
         values (#{title}, #{body})
     </insert>
 
+
+    <select id="findById" parameterType="int" resultMap="result">
+        select *
+        from article
+        where id = #{id}
+    </select>
+
+
     <update id="modify" parameterType="Article">
         update article
         set title = #{title},
         body = #{body},
-        updateDate = NOW()
+        update_date = NOW()
         where id = #{id}
     </update>
+
+    <delete id="delete" parameterType="int">
+        delete from article
+        where id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="result">
+        select *
+        from article;
+    </select>
 
 </mapper>
