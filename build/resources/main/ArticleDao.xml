@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.app.ArticleDao">
+
+    <resultMap id="result" type="Article">
+        <result property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="body" column="body"/>
+        <result property="regDate" column="reg_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+
+    <insert id="write" parameterType="Article" useGeneratedKeys="true" keyProperty="id">
+        insert into article (title, body)
+        values (#{title}, #{body})
+    </insert>
+
+
+    <select id="findById" parameterType="int" resultMap="result">
+        select *
+        from article
+        where id = #{id}
+    </select>
+
+
+    <update id="modify" parameterType="Article">
+        update article
+        set title = #{title},
+        body = #{body},
+        update_date = NOW()
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from article
+        where id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="result">
+        select *
+        from article;
+    </select>
+
+</mapper>
